@@ -6,6 +6,7 @@ import {
 import { Box } from "@chakra-ui/react";
 
 import Home from "./page/Home";
+import Post from "./page/Post";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/" element={<Home />} />
+          <Route path="/create" element={<Post />} />
         </Switch>
       </Router>
     </Box>

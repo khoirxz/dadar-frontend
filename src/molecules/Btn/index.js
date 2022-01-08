@@ -1,6 +1,6 @@
 import { Button } from "@chakra-ui/react";
 
-const Btn = ({ title }) => {
+const Btn = ({ title, ...rest }) => {
   return (
     <Button
       bgColor="#FF5B5B"
@@ -14,6 +14,7 @@ const Btn = ({ title }) => {
       _focus={{
         outline: "none",
       }}
+      {...rest}
     >
       {title}
     </Button>
