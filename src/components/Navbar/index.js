@@ -1,4 +1,5 @@
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 const menu = ["Home", "About Us"];
 
@@ -14,7 +15,7 @@ function Navbar() {
         py={3}
       >
         <Text as="h1" fontSize={23} fontWeight="bold">
-          Dadar
+          <Link to="/">Dadar</Link>
         </Text>
         <Flex
           as="ul"

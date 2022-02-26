@@ -11,33 +11,25 @@ import {
   Text,
   Input,
   Textarea,
-  IconButton,
-  InputGroup,
-  InputRightElement,
 } from "@chakra-ui/react";
-import { RiAddFill, RiCloseCircleFill } from "react-icons/ri";
 import { Content, Navbar } from "../../components";
 import { Btn } from "../../molecules";
+import Ings from "./Ings";
+import Steps from "./Steps";
 
 const Post = () => {
-  const [fields, setFields] = useState([{ value: null }]);
+  const [data, setData] = useState({
+    title: "",
+    description: "",
+    ingredients: [],
+    steps: [],
+    selectedFile: "",
+  });
 
-  const handleChange = (i, event) => {
-    const values = [...fields];
-    values[i].value = event.target.value;
-    setFields(values);
-  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  const handleAdd = () => {
-    const values = [...fields];
-    values.push({ value: null });
-    setFields(values);
-  };
-
-  const handleRemove = (i) => {
-    const values = [...fields];
-    values.splice(i, 1);
-    setFields(values);
+    console.log(data);
   };
 
   return (
@@ -52,7 +44,7 @@ const Post = () => {
           margin="auto"
           borderTopRadius={5}
         >
-          <chakra.form>
+          <chakra.form onSubmit={handleSubmit}>
             <FormControl>
               <Flex
                 mt={1}
@@ -121,72 +113,34 @@ const Post = () => {
                 size="lg"
                 w="full"
                 rounded="md"
+                onChange={(e) => {
+                  setData({ ...data, title: e.target.value });
+                }}
               />
             </FormControl>
 
-            <FormControl id="email" mt={1}>
+            <FormControl mt={1}>
               <FormLabel fontSize="sm" fontWeight="md">
-                Deskripsikan Maskanmu :
+                Deskripsikan Masakanmu :
               </FormLabel>
               <Textarea
                 mt={1}
                 rows={3}
                 shadow="sm"
+                placeholder="Masakan favorit keluarga..."
                 focusBorderColor="green.100"
                 fontSize={{ sm: "sm" }}
+                onChange={(e) => {
+                  setData({ ...data, description: e.target.value });
+                }}
               />
             </FormControl>
 
-            <FormControl my={5}>
-              <FormLabel htmlFor="ingredients" fontSize="sm" fontWeight="md">
-                Tulis resepmu disini :
-              </FormLabel>
-
-              {fields.map((field, idx) => (
-                <InputGroup my={4} key={`${field}-${idx}`}>
-                  <Input
-                    name="ingredients"
-                    id="ingredients"
-                    autoComplete="ingredients"
-                    focusBorderColor="green.100"
-                    placeholder="2 siung bawang"
-                    shadow="sm"
-                    w="full"
-                    rounded="md"
-                    onChange={(e) => handleChange(idx, e)}
-                  />
-                  <InputRightElement
-                    children={
-                      fields.length !== 1 ? (
-                        <RiCloseCircleFill onClick={() => handleRemove(idx)} />
-                      ) : (
-                        <RiCloseCircleFill color="#868a87" />
-                      )
-                    }
-                  />
-                  {console.log(fields.length)}
-                </InputGroup>
-              ))}
-
-              <IconButton
-                width="full"
-                my={2}
-                aria-label="Add"
-                icon={<RiAddFill />}
-                bgColor="#e66a6a"
-                color="white"
-                _active={{
-                  backgroundColor: "#ff6161",
-                }}
-                _hover={{
-                  backgroundColor: "#f28080",
-                }}
-                onClick={() => handleAdd()}
-              />
-            </FormControl>
+            <Ings data={data} setData={setData} />
+            <Steps data={data} setData={setData} />
 
             <Box px={{ base: 4, sm: 6 }} py={3} textAlign="right">
-              <Btn title="Publis" />
+              <Btn type="submit" title="Publis" />
             </Box>
           </chakra.form>
         </Box>
