@@ -7,7 +7,7 @@ const Content = ({ children }) => {
       w="68%"
       margin="auto"
       className="Content"
-      my="8em"
+      py="8em"
       fontFamily="Poppins"
     >
       {children}

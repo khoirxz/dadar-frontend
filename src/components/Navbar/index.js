@@ -32,6 +32,7 @@ function Navbar() {
 
           <Box as="li" pl="4">
             <Button
+              as={Link}
               bgColor="#FF5B5B"
               color="white"
               _hover={{
@@ -43,8 +44,9 @@ function Navbar() {
               _focus={{
                 outline: "none",
               }}
+              to="/login"
             >
-              Daftar
+              Login
             </Button>
           </Box>
         </Flex>

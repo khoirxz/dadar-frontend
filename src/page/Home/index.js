@@ -12,7 +12,7 @@ function Home() {
       </Hero>
 
       <Content>
-        <Box display="flex" my="5" flexDir="row" justifyContent="flex-end">
+        <Box display="flex" flexDir="row" justifyContent="flex-end">
           <Btn as={Link} to="/create" title="Buat resepmu!" />
         </Box>
         <Box display="grid" gridTemplateColumns="repeat(4, 1fr)" gap="10px">
