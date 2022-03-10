@@ -8,6 +8,8 @@ import { Box } from "@chakra-ui/react";
 import Home from "./page/Home";
 import Post from "./page/Post";
 import Login from "./page/Login";
+import Signup from "./page/Signup";
+import Recipe from "./page/Recipe";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/create" element={<Post />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/recipe" element={<Recipe />} />
         </Switch>
       </Router>
     </Box>
