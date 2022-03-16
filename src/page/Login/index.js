@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Input, Text } from "@chakra-ui/react";
 import { Content } from "../../components";
 import { Btn } from "../../molecules";
 import { Link } from "react-router-dom";
 
 const Login = () => {
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log(data);
+  };
   return (
     <Content>
       <Box
@@ -18,6 +28,7 @@ const Login = () => {
         alignItems="center"
         w="full"
         bgColor="white"
+        onSubmit={handleSubmit}
       >
         <Box mb="1rem">
           <Text as="h1" fontSize="3xl" fontWeight="extrabold">
@@ -36,6 +47,10 @@ const Login = () => {
           _hover={{
             borderColor: "red.300",
           }}
+          onChange={(e) => {
+            setData({ ...data, email: e.target.value });
+          }}
+          autoComplete="off"
         />
         <Input
           placeholder="password"
@@ -45,9 +60,13 @@ const Login = () => {
           _hover={{
             borderColor: "red.300",
           }}
+          onChange={(e) => {
+            setData({ ...data, password: e.target.value });
+          }}
+          autoComplete="current-password"
         />
         <Box mt="2rem" mb="1rem" w="full">
-          <Btn width="100%" title="Login" />
+          <Btn type="submit" width="100%" title="Login" />
         </Box>
         <Text as="p">
           belum punya akun ?{" "}

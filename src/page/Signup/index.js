@@ -37,6 +37,7 @@ const Signup = () => {
           _hover={{
             borderColor: "red.300",
           }}
+          autoComplete="off"
         />
         <Input
           placeholder="email"
@@ -47,6 +48,7 @@ const Signup = () => {
           _hover={{
             borderColor: "red.300",
           }}
+          autoComplete="email"
         />
         <Input
           placeholder="password"
@@ -57,6 +59,7 @@ const Signup = () => {
           _hover={{
             borderColor: "red.300",
           }}
+          autoComplete="new-password"
         />
         <Input
           placeholder="Konfirmasi Password"
@@ -67,6 +70,7 @@ const Signup = () => {
           _hover={{
             borderColor: "red.300",
           }}
+          autoComplete="confirm-password"
         />
         <Box mt="2rem" mb="1rem" w="full">
           <Btn width="100%" title="Daftar" />
