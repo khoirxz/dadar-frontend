@@ -1,52 +1,44 @@
 import React from "react";
-import { Box, Img, ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { Box, Img, Spinner, Text } from "@chakra-ui/react";
 import { Content, Navbar } from "../../components";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import imgPost from "../../assets/images/post1.jpg";
 
-const recipes = ["Kemangi", "Bawang merah dan putih", "Soto"];
-
-const Steps = ["Goreng Kemangi", "Tumis Bawang merah dan putih", "Makan Soto"];
-
 const Recipe = () => {
+  const { id } = useParams();
+
+  const post = useSelector((state) =>
+    id ? state.foods.find((p) => p._id === id) : null
+  );
+
   return (
     <>
       <Navbar />
       <Content>
-        <Box width="79%" margin="auto" bgColor="#ffffff" p={3}>
-          <Box>
-            <Img src={imgPost} w="full" height="auto" />
-          </Box>
-
-          <Box m={5}>
-            <Box className="content-header" my={7}>
-              <Text fontSize="4xl" fontWeight="bold" as="h1">
-                Soto Lamongan
-              </Text>
-              <Text fontSize="xl" as="p">
-                Soto Lamongan enak
-              </Text>
+        {!post?.length ? (
+          <Box width="79%" margin="auto" bgColor="#ffffff" p={3}>
+            <Box>
+              <Img src={imgPost} w="full" height="auto" />
             </Box>
 
-            <Box className="recipes" my={3}>
-              <Text>Bahan-Bahan</Text>
-              <UnorderedList>
-                {recipes.map((item, i) => (
-                  <ListItem key={i}>{item}</ListItem>
-                ))}
-              </UnorderedList>
-            </Box>
-
-            <Box className="steps-container" my={3}>
-              <Text>Langkah-langkah</Text>
-              <UnorderedList>
-                {Steps.map((item, i) => (
-                  <ListItem key={i}>{item}</ListItem>
-                ))}
-              </UnorderedList>
+            <Box m={5}>
+              <Box className="content-header" my={7}>
+                <Text fontSize="4xl" fontWeight="bold" as="h1">
+                  {post?.title}
+                </Text>
+                <Text fontSize="xl" as="p">
+                  {post?.description}
+                </Text>
+              </Box>
             </Box>
           </Box>
-        </Box>
+        ) : (
+          <Box width="79%" margin="auto" bgColor="#ffffff" p={3}>
+            <Spinner />
+          </Box>
+        )}
       </Content>
     </>
   );

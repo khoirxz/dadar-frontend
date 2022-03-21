@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Text, WrapItem, Avatar } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 const menu = ["Home", "About Us"];
@@ -13,6 +13,10 @@ function Navbar() {
         justifyContent="space-between"
         alignItems="center"
         py={3}
+        sx={{
+          backgroundColor: "rgba(255, 255, 255, .15)",
+          backdropFilter: "blur(5px)",
+        }}
       >
         <Text as="h1" fontSize={23} fontWeight="bold">
           <Link to="/">Dadar</Link>
@@ -29,6 +33,14 @@ function Navbar() {
               {item}
             </Text>
           ))}
+
+          <WrapItem>
+            <Avatar
+              size="md"
+              name="Rizqi K"
+              src="https://bit.ly/tioluwani-kolawole"
+            />{" "}
+          </WrapItem>
 
           <Box as="li" pl="4">
             <Button

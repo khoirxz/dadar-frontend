@@ -3,3 +3,23 @@
 ::selection {
   background: #ff5b5b79;
 }
+
+* {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+::-webkit-scrollbar:hover {
+  width: 20px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #adadad96;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #3b3b3b96;
+}
+::-webkit-scrollbar-track {
+  background-color: #ffe9e9;
+}

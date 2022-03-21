@@ -1,41 +1,69 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   chakra,
   Box,
   FormControl,
   FormLabel,
   Flex,
-  Stack,
   Icon,
-  VisuallyHidden,
-  Text,
   Input,
   Textarea,
 } from "@chakra-ui/react";
+import FileBase from "react-file-base64";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+
+import { createPost } from "../../actions/foods";
 import { Content, Navbar } from "../../components";
 import { Btn } from "../../molecules";
-import Ings from "./Ings";
-import Steps from "./Steps";
+import IngsComponent from "./IngsComponent";
+import StepsComponent from "./StepsComponent";
 
 const Post = () => {
+  const { id } = useParams();
+
   const [data, setData] = useState({
     title: "",
     description: "",
+    content: "",
+    selectedFile: "",
     ingredients: [],
     steps: [],
-    selectedFile: "",
   });
+
+  const dispatch = useDispatch();
+  const post = useSelector((state) =>
+    id ? state.foods.find((p) => p._id === id) : null
+  );
+
+  useEffect(() => {
+    if (id) {
+      setData({
+        title: post?.title,
+        description: post?.description,
+        selectedFile: post?.selectedFile,
+        content: post?.content,
+        ingredients: post?.ingredients,
+        steps: post?.steps,
+      });
+    }
+  }, [post, id]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (id) {
+      // update
+    }
+    dispatch(createPost(data));
     console.log(data);
   };
+  //! code is work from here
+  // console.log(data);
 
   return (
     <Box display="flex" flexDir="column">
       <Navbar />
-
       <Content>
         <Box
           bgColor="#ffffff"
@@ -55,8 +83,9 @@ const Post = () => {
                 borderWidth={2}
                 borderStyle="dashed"
                 rounded="md"
+                flexDir="column"
               >
-                <Stack spacing={1} textAlign="center">
+                <Box>
                   <Icon
                     mx="auto"
                     boxSize={12}
@@ -72,29 +101,17 @@ const Post = () => {
                       strokeLinejoin="round"
                     />
                   </Icon>
-                  <Flex fontSize="sm" alignItems="baseline">
-                    <chakra.label
-                      htmlFor="file-upload"
-                      cursor="pointer"
-                      rounded="md"
-                      fontSize="md"
-                      pos="relative"
-                      _hover={{
-                        color: "#FF5B5B",
-                      }}
-                    >
-                      <span>Upload gambar masakanmu </span>
-                      <VisuallyHidden>
-                        <input
-                          id="file-upload"
-                          name="file-upload"
-                          type="file"
-                        />
-                      </VisuallyHidden>
-                    </chakra.label>
-                  </Flex>
-                  <Text fontSize="xs">PNG, JPG, GIF up to 10MB</Text>
-                </Stack>
+                </Box>
+                <Box width="50px">
+                  <FileBase
+                    id="foodImg"
+                    type="file"
+                    multiple={false}
+                    onDone={({ base64 }) =>
+                      setData({ ...data, selectedFile: base64 })
+                    }
+                  />
+                </Box>
               </Flex>
             </FormControl>
 
@@ -113,13 +130,14 @@ const Post = () => {
                 size="lg"
                 w="full"
                 rounded="md"
+                value={data.title || ""}
                 onChange={(e) => {
                   setData({ ...data, title: e.target.value });
                 }}
               />
             </FormControl>
 
-            <FormControl mt={1}>
+            <FormControl my={4}>
               <FormLabel fontSize="sm" fontWeight="md">
                 Deskripsikan Masakanmu :
               </FormLabel>
@@ -130,14 +148,15 @@ const Post = () => {
                 placeholder="Masakan favorit keluarga..."
                 focusBorderColor="green.100"
                 fontSize={{ sm: "sm" }}
+                value={data.description || ""}
                 onChange={(e) => {
                   setData({ ...data, description: e.target.value });
                 }}
               />
             </FormControl>
 
-            <Ings data={data} setData={setData} />
-            <Steps data={data} setData={setData} />
+            <IngsComponent data={data} setData={setData} id={id} />
+            <StepsComponent data={data} setData={setData} id={id} />
 
             <Box px={{ base: 4, sm: 6 }} py={3} textAlign="right">
               <Btn type="submit" title="Publis" />

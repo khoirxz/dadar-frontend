@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FormControl,
   FormLabel,
@@ -9,7 +9,12 @@ import {
 } from "@chakra-ui/react";
 import { RiAddFill, RiCloseCircleFill } from "react-icons/ri";
 
-const Ings = ({ data, setData }) => {
+const IngsComponent = ({ data, setData, id }) => {
+  useEffect(() => {
+    if (id) {
+      setFields(data?.ingredients);
+    }
+  }, [data, id]);
   const [fields, setFields] = useState([{ value: null }]);
 
   const handleChange = (i, event) => {
@@ -23,12 +28,14 @@ const Ings = ({ data, setData }) => {
     const values = [...fields];
     values.push({ value: null });
     setFields(values);
+    setData({ ...data, ingredients: values });
   };
 
   const handleRemove = (i) => {
     const values = [...fields];
     values.splice(i, 1);
     setFields(values);
+    setData({ ...data, ingredients: values });
   };
 
   return (
@@ -37,7 +44,7 @@ const Ings = ({ data, setData }) => {
         Tulis Resep :
       </FormLabel>
 
-      {fields.map((field, idx) => (
+      {fields?.map((field, idx) => (
         <InputGroup my={4} key={`${field}-${idx}`}>
           <Input
             name="ingredients"
@@ -50,6 +57,7 @@ const Ings = ({ data, setData }) => {
             onChange={(e) => handleChange(idx, e)}
             isRequired
             autoComplete="off"
+            value={field.value || ""}
           />
           <InputRightElement
             children={
@@ -82,4 +90,4 @@ const Ings = ({ data, setData }) => {
   );
 };
 
-export default Ings;
+export default IngsComponent;
