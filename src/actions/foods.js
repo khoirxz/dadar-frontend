@@ -11,21 +11,21 @@ export const getFoods = () => async (dispatch) => {
   }
 };
 
-export const getFood = (id) => async (dispatch) => {
-  try {
-    const { data } = await api.getPost(id);
-
-    dispatch({ type: "SINGLE", payload: data });
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-
 export const createPost = (post) => async (dispatch) => {
   try {
     const { data } = await api.createPost(post);
 
     dispatch({ type: "CREATE", payload: data });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const updateFood = (id, post) => async (dispatch) => {
+  try {
+    const { data } = await api.updatePost(id, post);
+
+    dispatch({ type: "UPDATE", payload: data });
   } catch (error) {
     console.log(error.message);
   }

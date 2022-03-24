@@ -13,7 +13,7 @@ import FileBase from "react-file-base64";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import { createPost } from "../../actions/foods";
+import { createPost, updateFood } from "../../actions/foods";
 import { Content, Navbar } from "../../components";
 import { Btn } from "../../molecules";
 import IngsComponent from "./IngsComponent";
@@ -25,7 +25,6 @@ const Post = () => {
   const [data, setData] = useState({
     title: "",
     description: "",
-    content: "",
     selectedFile: "",
     ingredients: [],
     steps: [],
@@ -42,7 +41,6 @@ const Post = () => {
         title: post?.title,
         description: post?.description,
         selectedFile: post?.selectedFile,
-        content: post?.content,
         ingredients: post?.ingredients,
         steps: post?.steps,
       });
@@ -54,8 +52,10 @@ const Post = () => {
 
     if (id) {
       // update
+      dispatch(updateFood(id, data));
+    } else {
+      dispatch(createPost(data));
     }
-    dispatch(createPost(data));
     console.log(data);
   };
   //! code is work from here

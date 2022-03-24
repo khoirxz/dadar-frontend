@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import placeholder from "../../assets/images/foodplaceholder.jpg";
 
-const Card = ({ title, desc, id }) => {
+const Card = ({ data }) => {
   return (
     <Flex
       as="div"
@@ -13,17 +13,17 @@ const Card = ({ title, desc, id }) => {
       flexDir="column"
       shadow="md"
     >
-      <Box className="img-thumb-card" as={Link} to={`/recipe/${id}`}>
+      <Box className="img-thumb-card" as={Link} to={`/recipe/${data._id}`}>
         <Image
           width="full"
           height="250px"
           objectFit="cover"
-          src={placeholder}
+          src={data.selectedFile}
           fallbackSrc={placeholder}
         />
       </Box>
       <Box className="content-card" p={4}>
-        <Link to={`/recipe/${id}`}>
+        <Link to={`/recipe/${data._id}`}>
           <Box mb={2}>
             <Text
               fontSize="18px"
@@ -34,13 +34,13 @@ const Card = ({ title, desc, id }) => {
                 color: "#FF7979",
               }}
             >
-              {title}
+              {data.title}
             </Text>
           </Box>
         </Link>
         <Box>
           <Text fontSize="14px" as="p">
-            {desc}
+            {data.description}
           </Text>
         </Box>
         <Flex mt={3}>
@@ -67,7 +67,7 @@ const Card = ({ title, desc, id }) => {
             fontSize={12}
             cursor="pointer"
             colorScheme="orange"
-            to={`/edit/${id}`}
+            to={`/edit/${data._id}`}
           >
             ✏️ edit
           </Badge>

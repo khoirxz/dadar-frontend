@@ -3,9 +3,12 @@ import { Content, Footer, Hero, Navbar, Search } from "../../components";
 import { Btn, Card } from "../../molecules";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 function Home() {
   const foods = useSelector((state) => state.foods);
+
+  useEffect(() => {}, [foods]);
 
   console.log(foods);
   return (
@@ -33,12 +36,7 @@ function Home() {
         ) : (
           <Box display="grid" gridTemplateColumns="repeat(4, 1fr)" gap="10px">
             {foods.map((items) => (
-              <Card
-                key={items._id}
-                title={items.title}
-                desc={items.description}
-                id={items._id}
-              />
+              <Card key={items._id} data={items} />
             ))}
           </Box>
         )}

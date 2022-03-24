@@ -20,6 +20,7 @@ function App() {
   useEffect(() => {
     dispatch(getFoods());
   }, [dispatch]);
+
   return (
     <Box bgColor="#FFE9E9" color="#4F4C4C" minH="100vh">
       <Router>
@@ -30,6 +31,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/recipe/:id" element={<Recipe />} />
+          {/* account route */}
         </Switch>
       </Router>
     </Box>

@@ -4,8 +4,10 @@ const food = (foods = [], action) => {
       return action.payload;
     case "CREATE":
       return [...foods, action.payload];
-    case "SINGLE":
-      return [...foods, action.payload];
+    case "UPDATE":
+      return foods.map((f) =>
+        f._id !== action.payload._id ? f : action.payload
+      );
     default:
       return foods;
   }
