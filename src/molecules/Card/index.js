@@ -1,9 +1,13 @@
 import { Badge, Box, Flex, Image, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import { deleteFood } from "../../actions/foods";
 
 import placeholder from "../../assets/images/foodplaceholder.jpg";
 
 const Card = ({ data }) => {
+  const dispatch = useDispatch();
   return (
     <Flex
       as="div"
@@ -58,7 +62,9 @@ const Card = ({ data }) => {
             fontSize={12}
             cursor="pointer"
             colorScheme="yellow"
-            onClick={() => {}}
+            onClick={() => {
+              dispatch(deleteFood(data._id));
+            }}
           >
             👎 delete
           </Badge>

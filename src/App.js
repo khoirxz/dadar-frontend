@@ -14,6 +14,9 @@ import Login from "./page/Login";
 import Signup from "./page/Signup";
 import Recipe from "./page/Recipe";
 
+//! Account Component
+import Galery from "./page/User/Galery";
+
 function App() {
   const dispatch = useDispatch();
 
@@ -32,6 +35,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/recipe/:id" element={<Recipe />} />
           {/* account route */}
+          <Route path="/account" element={<Galery />} />
         </Switch>
       </Router>
     </Box>

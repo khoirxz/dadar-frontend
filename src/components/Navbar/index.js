@@ -36,10 +36,12 @@ function Navbar() {
 
           <WrapItem>
             <Avatar
+              as={Link}
               size="md"
               name="Rizqi K"
               src="https://bit.ly/tioluwani-kolawole"
-            />{" "}
+              to="/account"
+            />
           </WrapItem>
 
           <Box as="li" pl="4">
