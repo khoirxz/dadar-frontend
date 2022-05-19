@@ -4,7 +4,8 @@ const Search = () => {
   return (
     <Box
       display="flex"
-      width="400px"
+      maxW="400px"
+      width="full"
       margin="auto"
       bgColor="white"
       p="1.5"

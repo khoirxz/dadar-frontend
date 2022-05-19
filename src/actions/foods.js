@@ -40,3 +40,13 @@ export const deleteFood = (id, post) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const likePost = (id) => async (dispatch) => {
+  try {
+    const { data } = await api.likePost(id);
+    console.log(id);
+    dispatch({ type: "LIKE", payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};

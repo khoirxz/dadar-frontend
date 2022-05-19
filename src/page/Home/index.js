@@ -34,7 +34,14 @@ function Home() {
             />
           </Flex>
         ) : (
-          <Box display="grid" gridTemplateColumns="repeat(4, 1fr)" gap="10px">
+          <Box
+            display="grid"
+            gridTemplateColumns={{
+              base: "repeat(2, 1fr)",
+              lg: "repeat(4, 1fr)",
+            }}
+            gap="10px"
+          >
             {foods.map((items) => (
               <Card key={items._id} data={items} />
             ))}

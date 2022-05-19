@@ -7,6 +7,7 @@ const food = (foods = [], action) => {
     case "DELETE":
       return foods.filter((f) => f._id !== action.payload);
     case "UPDATE":
+    case "LIKE":
       return foods.map((f) =>
         f._id !== action.payload._id ? f : action.payload
       );

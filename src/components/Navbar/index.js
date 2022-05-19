@@ -13,15 +13,12 @@ function Navbar() {
         justifyContent="space-between"
         alignItems="center"
         py={3}
-        sx={{
-          backgroundColor: "rgba(255, 255, 255, .15)",
-          backdropFilter: "blur(5px)",
-        }}
       >
         <Text as="h1" fontSize={23} fontWeight="bold">
           <Link to="/">Dadar</Link>
         </Text>
         <Flex
+          display={{ base: "none", md: "flex", lg: "flex" }}
           as="ul"
           alignItems="center"
           sx={{

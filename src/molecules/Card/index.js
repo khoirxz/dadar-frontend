@@ -2,7 +2,7 @@ import { Badge, Box, Flex, Image, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { deleteFood } from "../../actions/foods";
+import { deleteFood, likePost } from "../../actions/foods";
 
 import placeholder from "../../assets/images/foodplaceholder.jpg";
 
@@ -17,10 +17,16 @@ const Card = ({ data }) => {
       flexDir="column"
       shadow="md"
     >
-      <Box className="img-thumb-card" as={Link} to={`/recipe/${data._id}`}>
+      <Box
+        width="full"
+        height="250px"
+        className="img-thumb-card"
+        as={Link}
+        to={`/recipe/${data._id}`}
+      >
         <Image
           width="full"
-          height="250px"
+          height="full"
           objectFit="cover"
           src={data.selectedFile}
           fallbackSrc={placeholder}
@@ -53,9 +59,11 @@ const Card = ({ data }) => {
             fontSize={12}
             cursor="pointer"
             colorScheme="pink"
-            onClick={() => {}}
+            onClick={() => {
+              dispatch(likePost(data._id));
+            }}
           >
-            ❤️ like
+            ❤️ {data.likeCount} like
           </Badge>
           <Badge
             mr={1}

@@ -5,7 +5,7 @@ const Hero = ({ children }) => {
     <Box
       as="div"
       className="Hero"
-      maxW="1450"
+      maxW="1450px"
       w="78%"
       margin="auto"
       textAlign="center"
