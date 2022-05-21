@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:5000/api";
+const url = "https://dadar-project.herokuapp.com/api";
 
 export const fetchPosts = () => axios.get(`${url}/foods`);
 export const createPost = (newPost) => axios.post(`${url}/foods`, newPost);
