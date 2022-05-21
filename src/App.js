@@ -28,14 +28,18 @@ function App() {
     <Box bgColor="#FFE9E9" color="#4F4C4C" minH="100vh">
       <Router>
         <Switch>
-          <Route path="/" element={<Home />} />
-          <Route path="/:create" element={<Post />} />
-          <Route path="/edit/:id" element={<Post />} />
+          {/* login route & signup */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          {/* base router */}
+          <Route path="/" element={<Home />} />
+          <Route path="/:create" element={<Post />} />
+          <Route path="/:edit/:id" element={<Post />} />
           <Route path="/recipe/:slug" element={<Recipe />} />
           {/* account route */}
           <Route path="/account" element={<Galery />} />
+          {/* 404 */}
+          {/* <Route path='*' element={<></>} /> */}
         </Switch>
       </Router>
     </Box>
