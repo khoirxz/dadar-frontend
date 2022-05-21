@@ -43,10 +43,12 @@ const Recipe = () => {
           <Box width="79%" margin="auto" bgColor="#ffffff" p={3}>
             <Box>
               <Image
+                className="img-thumb"
                 fallbackSrc={imgPost}
                 src={post?.selectedFile}
                 w="full"
-                height="auto"
+                maxH="400px"
+                objectFit="cover"
               />
             </Box>
 
