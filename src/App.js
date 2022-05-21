@@ -29,11 +29,11 @@ function App() {
       <Router>
         <Switch>
           <Route path="/" element={<Home />} />
-          <Route path="/create" element={<Post />} />
+          <Route path="/:create" element={<Post />} />
           <Route path="/edit/:id" element={<Post />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/recipe/:id" element={<Recipe />} />
+          <Route path="/recipe/:slug" element={<Recipe />} />
           {/* account route */}
           <Route path="/account" element={<Galery />} />
         </Switch>

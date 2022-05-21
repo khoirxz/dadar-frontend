@@ -36,6 +36,7 @@ function Home() {
         ) : (
           <Box
             display="grid"
+            width="100%"
             gridTemplateColumns={{
               base: "repeat(2, 1fr)",
               lg: "repeat(4, 1fr)",

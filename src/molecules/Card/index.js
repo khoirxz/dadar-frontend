@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Badge, Box, Flex, Image, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -8,6 +9,8 @@ import placeholder from "../../assets/images/foodplaceholder.jpg";
 
 const Card = ({ data }) => {
   const dispatch = useDispatch();
+  const [like, setLike] = useState(data.likeCount);
+
   return (
     <Flex
       as="div"
@@ -16,13 +19,14 @@ const Card = ({ data }) => {
       borderRadius="3px"
       flexDir="column"
       shadow="md"
+      justifyContent="space-between"
     >
       <Box
         width="full"
         height="250px"
         className="img-thumb-card"
         as={Link}
-        to={`/recipe/${data._id}`}
+        to={`/recipe/${data.link}`}
       >
         <Image
           width="full"
@@ -32,8 +36,9 @@ const Card = ({ data }) => {
           fallbackSrc={placeholder}
         />
       </Box>
+
       <Box className="content-card" p={4}>
-        <Link to={`/recipe/${data._id}`}>
+        <Link to={`/recipe/${data.link}`}>
           <Box mb={2}>
             <Text
               fontSize="18px"
@@ -53,7 +58,7 @@ const Card = ({ data }) => {
             {data.description}
           </Text>
         </Box>
-        <Flex mt={3}>
+        <Flex flexDir={{ base: "column", md: "row" }} mt={3}>
           <Badge
             mr={1}
             fontSize={12}
@@ -61,9 +66,10 @@ const Card = ({ data }) => {
             colorScheme="pink"
             onClick={() => {
               dispatch(likePost(data._id));
+              setLike(like + 1);
             }}
           >
-            ❤️ {data.likeCount} like
+            ❤️ {like} like
           </Badge>
           <Badge
             mr={1}

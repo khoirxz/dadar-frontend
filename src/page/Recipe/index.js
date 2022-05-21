@@ -1,19 +1,41 @@
 import React from "react";
-import { Box, Image, List, ListItem, Spinner, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Image,
+  List,
+  ListItem,
+  Spinner,
+  Text,
+  Center,
+  Link,
+} from "@chakra-ui/react";
 import { Content, Navbar } from "../../components";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, Link as LinkDom } from "react-router-dom";
 
 import imgPost from "../../assets/images/post1.jpg";
 
 const Recipe = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
 
   const post = useSelector((state) =>
-    id ? state.foods.find((p) => p._id === id) : null
+    slug ? state.foods.find((p) => p.link === slug) : null
   );
 
-  return (
+  return !post ? (
+    <Content>
+      <Center mt="2.4rem">
+        <Text fontSize="3xl" fontWeight="bold">
+          Halaman tidak ditemukan 😢
+        </Text>
+      </Center>
+      <Center>
+        <Link as={LinkDom} to="/">
+          Kembali keberanda
+        </Link>
+      </Center>
+    </Content>
+  ) : (
     <>
       <Navbar />
       <Content>

@@ -8,10 +8,13 @@ import {
   Icon,
   Input,
   Textarea,
+  Center,
+  Text,
+  Link,
 } from "@chakra-ui/react";
 import FileBase from "react-file-base64";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, Link as LinkDom } from "react-router-dom";
 
 import { createPost, updateFood } from "../../actions/foods";
 import { Content, Navbar } from "../../components";
@@ -19,8 +22,10 @@ import { Btn } from "../../molecules";
 import IngsComponent from "./IngsComponent";
 import StepsComponent from "./StepsComponent";
 
+import "./style.css";
+
 const Post = () => {
-  const { id } = useParams();
+  const { id, create } = useParams();
 
   const [data, setData] = useState({
     title: "",
@@ -61,13 +66,20 @@ const Post = () => {
   //! code is work from here
   // console.log(data);
 
-  return (
+  return (id && post) || create ? (
     <Box display="flex" flexDir="column">
       <Navbar />
+
+      <Center mt="2.4rem">
+        <Text fontSize="3xl" fontWeight="bold">
+          {id ? "Edit masakan ✏️" : "Buat resepmu 📝"}
+        </Text>
+      </Center>
+
       <Content>
         <Box
           bgColor="#ffffff"
-          w="75%"
+          w={{ base: "97%", md: "80%", lg: "75%" }}
           padding={4}
           margin="auto"
           borderTopRadius={5}
@@ -102,9 +114,8 @@ const Post = () => {
                     />
                   </Icon>
                 </Box>
-                <Box width="50px">
+                <Box className="input-file">
                   <FileBase
-                    id="foodImg"
                     type="file"
                     multiple={false}
                     onDone={({ base64 }) =>
@@ -165,6 +176,19 @@ const Post = () => {
         </Box>
       </Content>
     </Box>
+  ) : (
+    <Content>
+      <Center mt="2.4rem">
+        <Text fontSize="3xl" fontWeight="bold">
+          Halaman tidak ditemukan 😢
+        </Text>
+      </Center>
+      <Center>
+        <Link as={LinkDom} to="/">
+          Kembali keberanda
+        </Link>
+      </Center>
+    </Content>
   );
 };
 

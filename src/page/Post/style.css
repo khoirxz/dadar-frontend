@@ -1,0 +1,12 @@
+.input-file > input {
+  color: transparent;
+  font-size: 12px;
+}
+.input-file > input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.input-file > input::before {
+  content: "Pilih gambar masakanmu";
+  color: #4f4c4c;
+  cursor: pointer;
+}

@@ -1,11 +1,15 @@
 import React from "react";
-import { Avatar, Box, Center, Flex, Text } from "@chakra-ui/react";
+import { Avatar, Box, Center, Flex, Text, Spinner } from "@chakra-ui/react";
 import { AiOutlineSetting } from "react-icons/ai";
+import { Card, Btn } from "../../../molecules";
+import { useSelector } from "react-redux";
 
 import { Content, Footer, Navbar } from "../../../components";
 import { Link } from "react-router-dom";
 
 const Galery = () => {
+  const foods = useSelector((state) => state.foods);
+
   return (
     <>
       <Navbar />
@@ -35,11 +39,41 @@ const Galery = () => {
           </Box>
         </Box>
         <Box my="5rem">
-          <Center>
+          <Center mb="4rem">
             <Text fontSize="3xl" fontWeight="bold">
               Galeri saya
             </Text>
           </Center>
+
+          <Box mb="3rem" display="flex" flexDir="row" justifyContent="flex-end">
+            <Btn as={Link} to="/create" title="Buat resepmu!" />
+          </Box>
+
+          {!foods.length ? (
+            <Flex alignItems="center" justifyContent="center">
+              <Spinner
+                thickness="4px"
+                speed="0.65s"
+                emptyColor="red.200"
+                color="red.500"
+                size="xl"
+              />
+            </Flex>
+          ) : (
+            <Box
+              display="grid"
+              width="100%"
+              gridTemplateColumns={{
+                base: "repeat(2, 1fr)",
+                lg: "repeat(4, 1fr)",
+              }}
+              gap="10px"
+            >
+              {foods.map((items) => (
+                <Card key={items._id} data={items} />
+              ))}
+            </Box>
+          )}
         </Box>
       </Content>
       <Footer />
